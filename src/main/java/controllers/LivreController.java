@@ -7,15 +7,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldListCell;
 
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AfficherLivres {
+public class LivreController {
     @FXML
     private TextField searchText ;
     @FXML
@@ -56,6 +54,7 @@ public class AfficherLivres {
 
     private void loadLivres() {
         livres.addAll(livreCrud.getAllLivres());
+        livreListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         livreListView.setItems(livres);
     }
 

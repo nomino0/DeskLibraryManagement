@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="548.0" prefWidth="936.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherLivres">
+<AnchorPane prefHeight="548.0" prefWidth="936.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LivreController">
     <TextField fx:id="searchText" layoutX="35.0" layoutY="20.0" promptText="search" />
 
     <ListView fx:id="livreListView" layoutX="35.0" layoutY="61.0" prefHeight="293.0" prefWidth="424.0">
