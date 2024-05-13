@@ -9,7 +9,7 @@ public class Reservation {
     private Date dateFin;
     private String nomClient;
     private String cinClient;
-    // Ajoutez d'autres informations si nécessaire
+
 
     public Reservation(int id ,Livre livre, Date dateDebut, Date dateFin, String nomClient, String cinClient) {
         this.id = id ;

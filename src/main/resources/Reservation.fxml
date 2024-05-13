@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -8,22 +9,29 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReservationController">
+<AnchorPane prefHeight="441.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReservationController">
         <VBox />
-        <TableView fx:id="reservationTable" layoutX="14.0" layoutY="55.0" prefHeight="221.0" prefWidth="466.0">
+        <TableView fx:id="reservationTable" layoutX="32.0" layoutY="118.0" prefHeight="221.0" prefWidth="758.0">
             <columns>
-                <TableColumn fx:id="idColumn" text="ID" />
-                <TableColumn fx:id="livreColumn" text="Livre" />
-                <TableColumn fx:id="dateDebutColumn" text="Date de début" />
-                <TableColumn fx:id="dateFinColumn" text="Date de fin" />
-                <TableColumn fx:id="nomClientColumn" text="Nom du client" />
-                <TableColumn fx:id="cinClientColumn" text="CIN du client" />
+                <TableColumn fx:id="idColumn" text="ID" visible="false" />
+                <TableColumn fx:id="livreColumn" prefWidth="205.0" text="Livre" />
+                <TableColumn fx:id="dateDebutColumn" prefWidth="137.0" text="Date de début" />
+                <TableColumn fx:id="dateFinColumn" minWidth="0.0" prefWidth="138.0" text="Date de fin" />
+                <TableColumn fx:id="nomClientColumn" prefWidth="126.0" text="Nom du client" />
+                <TableColumn fx:id="cinClientColumn" prefWidth="143.0" text="CIN du client" />
             </columns>
         </TableView>
-        <HBox layoutX="14.0" layoutY="330.0">
+        <HBox layoutX="14.0" layoutY="330.0" />
 
-            <Button onAction="#supprimerReservation" text="Supprimer" />
-        </HBox>
-         <Label layoutX="40.0" layoutY="7.0" styleClass="title" text="Gestion des Réservations" />
+         <Button layoutX="693.0" layoutY="370.0" onAction="#supprimerReservation" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #F12020;" text="Supprimer" textFill="WHITE" />
+   <VBox alignment="CENTER" prefHeight="62.0" prefWidth="830.0" spacing="20" style="-fx-background-color: #6CB5E8;">
+      <children>
+         <Label prefHeight="62.0" prefWidth="848.0" style="-fx-font-size: 20px;" text="Gestion des Réservations" textFill="WHITE">
+            <padding>
+               <Insets bottom="16.0" left="32.0" right="16.0" top="16.0" />
+            </padding>
+         </Label>
+      </children>
+   </VBox>
 
 </AnchorPane>

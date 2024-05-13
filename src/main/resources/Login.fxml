@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Login">
-    <VBox alignment="CENTER" spacing="20">
-        <Label style="-fx-font-size: 20px;" text="Connexion" />
-
-
-        <HBox>
-
-
-            <Label fx:id="errorMessage" style="-fx-text-fill: red;" text="" />
-        </HBox>
-
-
-        <HBox alignment="CENTER" spacing="20" />
+    <VBox alignment="CENTER" prefHeight="62.0" prefWidth="600.0" spacing="20" style="-fx-background-color: #6CB5E8;">
+      <HBox>
+         <children>
+              <Label prefHeight="62.0" prefWidth="513.0" style="-fx-font-size: 20px;" text="Connexion" textFill="WHITE">
+               <padding>
+                  <Insets bottom="16.0" left="32.0" right="16.0" top="16.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
     </VBox>
-      <Button layoutX="172.0" layoutY="269.0" onAction="#loginAction" text="Connexion" />
-      <Button layoutX="273.0" layoutY="278.0" onAction="#cancelAction" text="Annuler" />
+      <Button layoutX="351.0" layoutY="268.0" onAction="#loginAction" prefHeight="25.0" prefWidth="182.0" style="-fx-background-color: #5D6D7E;" text="Connexion" textFill="WHITE" />
 
-      <Label layoutX="59.0" layoutY="171.0" text="Mot de passe:" />
-      <PasswordField fx:id="passwordField" layoutX="135.0" layoutY="167.0" />
-      <TextField fx:id="emailField" layoutX="135.0" layoutY="88.0" />
-      <Label layoutX="30.0" layoutY="92.0" text="Email d'utilisateur:" />
+      <Label layoutX="348.0" layoutY="183.0" text="Mot de passe:" />
+      <PasswordField fx:id="passwordField" layoutX="348.0" layoutY="206.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField fx:id="emailField" layoutX="348.0" layoutY="137.0" prefHeight="25.0" prefWidth="182.0" />
+      <Label layoutX="348.0" layoutY="110.0" text="Email Admin:" />
+   <ImageView fitHeight="338.0" fitWidth="277.0" layoutX="37.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@Assets/pexels-polina-zimmerman-3747472.jpg" />
+      </image>
+   </ImageView>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="351.0" layoutY="307.0" onAction="#cancelAction" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 2PT; -fx-border-color: #5D6D7E;" text="Annuler" textAlignment="CENTER" textFill="#5d6d7e" />
 </AnchorPane>
