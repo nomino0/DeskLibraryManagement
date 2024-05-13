@@ -36,74 +36,66 @@ public class Login {
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        // Vérification des informations d'identification dans la base de données
         if (validateCredentials(email, password)) {
-            if (isAdmin(email)) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherLivres.fxml"));
-                    Parent root = loader.load();
-                    Scene scene = new Scene(root);
-                    
-                        stage.setScene(scene);
-                        stage.setTitle("AfficherLivres");
-                        stage.show();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherLivres.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                LivreController controller = loader.getController();
+                if (controller != null) {
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.err.println("Erreur lors du chargement de la vue AfficherLivres.fxml : " + e.getMessage());
+                    // Afficher la scène
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+
+                    // Obtenir la scène actuelle à partir de l'événement
+
+                    // Définir la nouvelle scène
+                    stage.setScene(scene);
+                    stage.show();
+
                 }
-            } else {
-                // L'utilisateur n'est pas un administrateur, afficher un message de réussite
-                errorMessage.setText("Connexion réussie !");
-                errorMessage.setStyle("-fx-text-fill: green;");
+                if (stage != null) {
+                    stage.setScene(scene);
+                    stage.setTitle("AfficherLivres");
+                    stage.show();
+                } else {
+                    System.err.println("La stage n'est pas initialisée !");
+                }
+            } catch (IOException e) {
+                System.err.println("Erreur lors du chargement de la vue AfficherLivres.fxml : " + e.getMessage());
+                errorMessage.setText("Erreur lors du chargement de la vue AfficherLivres.");
+                errorMessage.setStyle("-fx-text-fill: red;");
             }
         } else {
-            // Informations d'identification incorrectes, afficher un message d'erreur
             errorMessage.setText("Nom d'utilisateur ou mot de passe incorrect !");
             errorMessage.setStyle("-fx-text-fill: red;");
         }
     }
 
-
     public void cancelAction(ActionEvent actionEvent) {
         emailField.clear();
         passwordField.clear();
         errorMessage.setText("");
-
     }
+
     private boolean validateCredentials(String email, String password) {
+        Connection connection = ConnectionDB.getInstance().getConnection();
         try {
-            Connection  connection = ConnectionDB.getInstance().getConnection();
             String query = "SELECT * FROM user WHERE email = ? AND password = ?";
-            PreparedStatement  statement = connection.prepareStatement(query);
-            statement.setString(1, email);
-            statement.setString(2, password);
-            ResultSet   resultSet = statement.executeQuery();
-            return resultSet.next();
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, email);
+                statement.setString(2, password);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    return resultSet.next();
+                }
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la validation des informations d'identification : " + e.getMessage());
             return false;
         }
     }
-    private boolean isAdmin(String email) {
-        try {
-            Connection connection = ConnectionDB.getInstance().getConnection();
-            String query = "SELECT role FROM user WHERE email = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, email);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                String role = resultSet.getString("role");
-                // Vérifie si le rôle de l'utilisateur est "admin"
-                return role.equals("admin");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
-    private void openAdminView() {
 
     }
-}

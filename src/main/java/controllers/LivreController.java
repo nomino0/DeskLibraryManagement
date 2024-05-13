@@ -6,8 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class LivreController {
     @FXML
-    private TextField searchText ;
+    private TextField searchText;
     @FXML
     private TextField titreTextField;
     @FXML
@@ -97,7 +102,7 @@ public class LivreController {
         String genre = genreTextField.getText();
         String disponibilite = disponibiliteComboBox.getValue();
 
-        Livre nouveauLivre = new Livre(titre, auteur, isbn, datePub, prix,genre, disponibilite);
+        Livre nouveauLivre = new Livre(titre, auteur, isbn, datePub, prix, genre, disponibilite);
 
         try {
             livreCrud.ajouterLivre(nouveauLivre);
@@ -108,6 +113,7 @@ public class LivreController {
             throw new RuntimeException(e);
         }
     }
+
     private void afficherAlerteInformation(String titre, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titre);
@@ -115,6 +121,7 @@ public class LivreController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     public void modifierLivre(ActionEvent actionEvent) {
         Livre livreSelectionne = livreListView.getSelectionModel().getSelectedItem();
         if (livreSelectionne != null) {
@@ -147,6 +154,7 @@ public class LivreController {
         }
         livreListView.refresh();
     }
+
     private void searchLivre(String searchText) throws SQLException {
         List<Livre> searchResult = livres.stream()
                 .filter(livre -> {
@@ -164,6 +172,62 @@ public class LivreController {
         livreListView.setItems(FXCollections.observableArrayList(searchResult));
     }
 
+    @FXML
+    void AjoutReservation(ActionEvent actionEvent) throws SQLException {
+        Livre livreSelectionne = livreListView.getSelectionModel().getSelectedItem();
+        if (livreSelectionne != null) {
+            // Vérifier si le livre est disponible
+            if ("Disponible".equals(livreSelectionne.getDisponible())) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutReservation.fxml"));
+                    Parent root = loader.load();
+                    System.out.println("FXML file loaded successfully.");
+                    AjoutReservation controller = loader.getController();
+                    System.out.println("Controller initialized.");
 
+                    controller.setLivre(livreSelectionne);
+                    System.out.println("Data initialized in controller.");
+
+                    Stage stage = new Stage();
+                    stage.setTitle("Ajout Reservation");
+                    stage.setScene(new Scene(root));
+
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                // Afficher une alerte
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Livre non disponible");
+                alert.setHeaderText("Le livre sélectionné n'est pas disponible.");
+                alert.setContentText("Veuillez sélectionner un autre livre.");
+                alert.showAndWait();
+            }
+        } else {
+            System.out.println("Aucun Livre sélectionné.");
+        }
+        livreListView.refresh();
+    }
+    public void ConsulterReservation(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reservation.fxml"));
+            Parent root = loader.load();
+            System.out.println("FXML file loaded successfully.");
+            ReservationController controller = loader.getController();
+            System.out.println("Controller initialized.");
+
+            System.out.println("Data initialized in controller.");
+
+            Stage stage = new Stage();
+            stage.setTitle("Ajout Reservation");
+            stage.setScene(new Scene(root));
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
 

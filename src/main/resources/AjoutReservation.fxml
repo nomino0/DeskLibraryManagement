@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjoutReservation">
+    <Label styleClass="title" text="Formulaire de Réservation" />
+<VBox layoutX="22.0" layoutY="109.0">
+    <DatePicker fx:id="dateDebutPicker" promptText="Date de début" />
+    <DatePicker fx:id="dateFinPicker" promptText="Date de fin" />
+    <TextField fx:id="nomClientField" promptText="Nom du client" />
+    <TextField fx:id="cinClientField" promptText="CIN du client" />
+
+</VBox>
+
+    <HBox layoutX="69.0" layoutY="333.0" spacing="10">
+        <Button onAction="#validerAction" text="Valider" />
+        <Button onAction="#annulerAction" text="Annuler" />
+    </HBox>
+</AnchorPane>

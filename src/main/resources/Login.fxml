@@ -28,5 +28,5 @@
       <Label layoutX="59.0" layoutY="171.0" text="Mot de passe:" />
       <PasswordField fx:id="passwordField" layoutX="135.0" layoutY="167.0" />
       <TextField fx:id="emailField" layoutX="135.0" layoutY="88.0" />
-      <Label layoutX="30.0" layoutY="92.0" text="Nom d'utilisateur:" />
+      <Label layoutX="30.0" layoutY="92.0" text="Email d'utilisateur:" />
 </AnchorPane>
