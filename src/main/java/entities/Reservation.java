@@ -9,6 +9,8 @@ public class Reservation {
     private Date dateFin;
     private String nomClient;
     private String cinClient;
+    private boolean archived;
+
 
 
     public Reservation(int id ,Livre livre, Date dateDebut, Date dateFin, String nomClient, String cinClient) {
@@ -18,6 +20,7 @@ public class Reservation {
         this.dateFin = dateFin;
         this.nomClient = nomClient;
         this.cinClient = cinClient;
+        this.archived = archived;
     }
 
     public Reservation(Livre livre, Date dateDebut, Date dateFin, String nomClient, String cinClient) {
@@ -26,7 +29,19 @@ public class Reservation {
         this.dateFin = dateFin;
         this.nomClient = nomClient;
         this.cinClient = cinClient;
+        this.archived = false;
     }
+
+
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
+    }
+
     public Livre getLivre() {
         return livre;
     }

@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+
 <AnchorPane prefHeight="548.0" prefWidth="936.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LivreController">
     <VBox layoutX="488.0" layoutY="114.0" spacing="10.0">
         <TextField fx:id="titreTextField" promptText="Titre" />
@@ -23,7 +24,7 @@
         <TextField fx:id="prixTextField" promptText="Prix" />
         <TextField fx:id="genreTextField" promptText="Genre" />
         <DatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="196.0" promptText="Date de Publication" />
-        <Button text="Image Couverture" />
+        <Button onAction="#uploadCoverImage" text="Image Couverture" />
         <ComboBox fx:id="disponibiliteComboBox" promptText="Disponibilité">
             <items>
                 <FXCollections fx:factory="observableArrayList">

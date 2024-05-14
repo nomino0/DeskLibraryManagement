@@ -11,6 +11,7 @@ public class Livre {
     private float prix;
     private String genre;
     private String disponible;
+    private String imageUrl;
 
     public Livre() {
     }
@@ -31,7 +32,7 @@ public class Livre {
         return id;
     }
 
-    public Livre(int id, String titre, String auteur, Date datePub, String isbn, float prix, String genre, String disponible) {
+    public Livre(int id, String titre, String auteur, Date datePub, String isbn, float prix, String genre, String disponible, String imageUrl) {
         this.id = id;
         this.titre = titre;
         this.auteur = auteur;
@@ -40,6 +41,7 @@ public class Livre {
         this.prix = prix;
         this.genre = genre;
         this.disponible = disponible;
+        this.imageUrl = imageUrl;
     }
 
     public Livre(String titre, String auteur, String isbn, Date datePub, float prix, String genre, String disponible) {
@@ -50,6 +52,7 @@ public class Livre {
         this.prix = prix;
         this.genre = genre;
         this.disponible = disponible;
+        this.imageUrl = imageUrl;
     }
 
 
@@ -113,4 +116,13 @@ public class Livre {
     public void setDisponible(String disponible) {
         this.disponible = disponible;
     }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 }

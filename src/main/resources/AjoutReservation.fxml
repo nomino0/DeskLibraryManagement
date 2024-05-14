@@ -39,7 +39,7 @@
    </VBox>
    <ImageView fitHeight="338.0" fitWidth="234.0" layoutX="322.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@Assets/Capture%20d’écran%202024-05-13%20212231.png" />
+         <Image url="@Assets/Capture d’écran 2024-05-13 212231.png" />
       </image>
    </ImageView>
 </AnchorPane>

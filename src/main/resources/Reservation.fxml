@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="441.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReservationController">
         <VBox />
-        <TableView fx:id="reservationTable" layoutX="32.0" layoutY="118.0" prefHeight="221.0" prefWidth="758.0">
+        <TableView fx:id="reservationTable" layoutX="32.0" layoutY="138.0" prefHeight="221.0" prefWidth="758.0">
             <columns>
                 <TableColumn fx:id="idColumn" text="ID" visible="false" />
                 <TableColumn fx:id="livreColumn" prefWidth="205.0" text="Livre" />
@@ -21,10 +21,12 @@
                 <TableColumn fx:id="cinClientColumn" prefWidth="143.0" text="CIN du client" />
             </columns>
         </TableView>
-        <HBox layoutX="14.0" layoutY="330.0" />
+        <HBox layoutX="14.0" layoutY="350.0" />
 
-         <Button layoutX="693.0" layoutY="370.0" onAction="#supprimerReservation" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #F12020;" text="Supprimer" textFill="WHITE" />
-   <VBox alignment="CENTER" prefHeight="62.0" prefWidth="830.0" spacing="20" style="-fx-background-color: #6CB5E8;">
+         <Button layoutX="669.0" layoutY="390.0" onAction="#supprimerReservation" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #F12020;" text="Supprimer" textFill="WHITE" />
+        <Button fx:id="archiverButton" layoutX="537.0" layoutY="390.0" onAction="#archiverReservation" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #52BE80;" text="Archiver" textFill="WHITE" />
+
+    <VBox alignment="CENTER" prefHeight="62.0" prefWidth="830.0" spacing="20" style="-fx-background-color: #6CB5E8;">
       <children>
          <Label prefHeight="62.0" prefWidth="848.0" style="-fx-font-size: 20px;" text="Gestion des Réservations" textFill="WHITE">
             <padding>
@@ -33,5 +35,9 @@
          </Label>
       </children>
    </VBox>
+    <HBox layoutX="32.0" layoutY="88.0" spacing="20.0">
+        <Button onAction="#afficherArchives" text="Afficher les Réservations Archivées" />
+        <Button onAction="#afficherActives" text="Afficher les Réservations Actives" />
+    </HBox>
 
 </AnchorPane>

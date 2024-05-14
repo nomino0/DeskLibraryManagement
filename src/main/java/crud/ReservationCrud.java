@@ -2,7 +2,6 @@ package crud;
 
 import entities.Livre;
 import entities.Reservation;
-import entities.User;
 import utils.ConnectionDB;
 
 import java.sql.*;
@@ -60,19 +59,19 @@ public class ReservationCrud {
         return reservations;
     }
 
-    // Update operation
     public void updateReservation(Reservation reservation) {
         Connection connection = ConnectionDB.getInstance().getConnection();
 
         try {
-            String query = "UPDATE Reservation SET livre_id=?, date_debut=?, date_fin=?, nom_client=?, cin_client=? WHERE id=?";
+            String query = "UPDATE Reservation SET livre_id=?, date_debut=?, date_fin=?, nom_client=?, cin_client=?, archived=? WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, reservation.getLivre().getId());
             statement.setDate(2, new java.sql.Date(reservation.getDateDebut().getTime()));
             statement.setDate(3, new java.sql.Date(reservation.getDateFin().getTime()));
             statement.setString(4, reservation.getNomClient());
             statement.setString(5, reservation.getCinClient());
-            statement.setInt(6, reservation.getId());
+            statement.setBoolean(6, reservation.isArchived()); // Update archived status
+            statement.setInt(7, reservation.getId());
             statement.executeUpdate();
             System.out.println("Reservation mise à jour avec succès !");
         } catch (SQLException e) {
@@ -80,7 +79,64 @@ public class ReservationCrud {
         }
     }
 
-    // Delete operation
+    public List<Reservation> getNonArchivedReservations() {
+        Connection connection = ConnectionDB.getInstance().getConnection();
+
+        List<Reservation> reservations = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM Reservation WHERE archived = false";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int livreId = resultSet.getInt("livre_id");
+                Date dateDebut = resultSet.getDate("date_debut");
+                Date dateFin = resultSet.getDate("date_fin");
+                String nomClient = resultSet.getString("nom_client");
+                String cinClient = resultSet.getString("cin_client");
+
+                // Fetch corresponding Livre object based on livreId
+                Livre livre = getLivreById(livreId);
+
+                Reservation reservation = new Reservation(id, livre, dateDebut, dateFin, nomClient, cinClient);
+                reservations.add(reservation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reservations;
+    }
+
+    // Read operation to get all archived reservations
+    public List<Reservation> getArchivedReservations() {
+        Connection connection = ConnectionDB.getInstance().getConnection();
+
+        List<Reservation> reservations = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM Reservation WHERE archived = true";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int livreId = resultSet.getInt("livre_id");
+                Date dateDebut = resultSet.getDate("date_debut");
+                Date dateFin = resultSet.getDate("date_fin");
+                String nomClient = resultSet.getString("nom_client");
+                String cinClient = resultSet.getString("cin_client");
+
+                // Fetch corresponding Livre object based on livreId
+                Livre livre = getLivreById(livreId);
+
+                Reservation reservation = new Reservation(id, livre, dateDebut, dateFin, nomClient, cinClient);
+                reservations.add(reservation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reservations;
+    }
+
+
     public void deleteReservation(int reservationId) {
         Connection connection = ConnectionDB.getInstance().getConnection();
 
@@ -113,7 +169,8 @@ public class ReservationCrud {
                         resultSet.getString("isbn"),
                         resultSet.getFloat("prix"),
                         resultSet.getString("genre"),
-                        resultSet.getString("disponible")
+                        resultSet.getString("disponible"),
+                        resultSet.getString("imageUrl")
                 );
             }
         } catch (SQLException e) {

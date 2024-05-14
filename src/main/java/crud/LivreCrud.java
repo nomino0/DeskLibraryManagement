@@ -14,7 +14,7 @@ public class LivreCrud {
     public void ajouterLivre(Livre livre) {
         Connection connection = ConnectionDB.getInstance().getConnection();
         try {
-            String query = "INSERT INTO Livre (titre, auteur, datePub, isbn, prix, genre, disponible) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Livre (titre, auteur, datePub, isbn, prix, genre, disponible, imageUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, livre.getTitre());
             preparedStatement.setString(2, livre.getAuteur());
@@ -23,10 +23,10 @@ public class LivreCrud {
             preparedStatement.setFloat(5, livre.getPrix());
             preparedStatement.setString(6, livre.getGenre());
             preparedStatement.setString(7, livre.getDisponible());
+            preparedStatement.setString(8, livre.getImageUrl()); // Set imageUrl parameter
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
     }
     public void supprimerLivre(int id) {
@@ -43,7 +43,7 @@ public class LivreCrud {
     public void modifierLivre(Livre livre) {
         Connection connection = ConnectionDB.getInstance().getConnection();
         try {
-            String query = "UPDATE Livre SET titre = ?, auteur = ?, datePub = ?, isbn = ?, prix = ?, genre = ?, disponible = ? WHERE id = ?";
+            String query = "UPDATE Livre SET titre = ?, auteur = ?, datePub = ?, isbn = ?, prix = ?, genre = ?, disponible = ?, imageUrl = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, livre.getTitre());
             preparedStatement.setString(2, livre.getAuteur());
@@ -52,12 +52,14 @@ public class LivreCrud {
             preparedStatement.setFloat(5, livre.getPrix());
             preparedStatement.setString(6, livre.getGenre());
             preparedStatement.setString(7, livre.getDisponible());
-            preparedStatement.setInt(8, livre.getId());
+            preparedStatement.setString(8, livre.getImageUrl()); // Set imageUrl parameter
+            preparedStatement.setInt(9, livre.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public List<Livre> getAllLivres() {
         List<Livre> livres = new ArrayList<>();
         Connection connection = ConnectionDB.getInstance().getConnection();
@@ -74,7 +76,8 @@ public class LivreCrud {
                         resultSet.getString("isbn"),
                         resultSet.getFloat("prix"),
                         resultSet.getString("genre"),
-                        resultSet.getString("disponible")
+                        resultSet.getString("disponible"),
+                        resultSet.getString("imageUrl") // Include imageUrl
                 );
                 livres.add(livre);
             }
