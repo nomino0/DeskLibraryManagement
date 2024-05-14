@@ -50,7 +50,7 @@ This project is a simple library management system implemented in JavaFX, allowi
 
 ## Contributors
 
-- Amine Mayoufi(https://github.com/nomino)
+- Amine Mayoufi(https://github.com/nomino0)
 - Med Amine Guesmi](https://github.com/contributor2)
 
 ## License
