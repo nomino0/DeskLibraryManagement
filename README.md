@@ -4,14 +4,12 @@ This project is a simple library management system implemented in JavaFX, allowi
 
 ## Screenshots
 
-![Screenshot 1](Screenshot/Capture%20d’écran%202024-05-13%20221006.png)
-
 *Screenshot 1: The main interface of the Desk Library Management System.*
 
-![Screenshot 2](Screenshot/Capture%20d’écran%202024-05-13%20221123.png)
+![Screenshot 2](Screenshot/Capture%20d’écran%202024-05-13%20221006.png)
 
-*Screenshot 2: Archiving a reservation in the system.*
-
+*Screenshot 2: Login and reservation in the system.*
+![Screenshot 1](Screenshot/Capture%20d’écran%202024-05-13%20221123.png)
 ![Screenshot 3](Screenshot/Capture%20d’écran%202024-05-13%20221151.png)
 
 *Screenshot 3: Viewing archived reservations.*
